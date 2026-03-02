@@ -358,8 +358,8 @@ If upgrading from an older setup:
 ## TODO
 
 - [ ] Review `laravel-php-guidelines.md` — overlaps with Laravel Boost and `php-guidelines-from-spatie` skill. Consider trimming to only what Boost doesn't cover (docblock rules, happy path, naming conventions) or removing entirely.
-- [ ] Review Freek's skills — decide which to keep, remove, or replace with personal ones.
-- [ ] Review Freek's agents — adapt or remove agents that don't match personal workflow.
+- [ ] Review remaining skills — install project-specific skills (Nuxt, Inertia, etc.) per-project rather than globally.
+- [ ] Review agents — consider removing `task-planner` (superpowers `writing-plans` does the same), and `laravel-feature-builder` (partial overlap with superpowers workflow). Keep `laravel-debugger` (Laravel-specific, runs on Sonnet) and `laravel-simplifier` (unique, no overlap).
 - [ ] Review `config/Brewfile` — candidates for removal: `hub` (deprecated, replaced by `gh`), `ack` (replaced by `ripgrep`), `starship` (using agnoster), `doctl`, `git-secret`, `mackup`.
 - [ ] Review `home/.aliases` and `home/.functions` — identify Freek-specific shortcuts to override in `~/.dotfiles-custom/shell/`.
 ---
