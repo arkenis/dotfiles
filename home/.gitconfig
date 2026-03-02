@@ -1,12 +1,12 @@
 [core]
-	excludesfile = /Users/freek/.global-gitignore
+	excludesfile = /Users/jonathan/.global-gitignore
 	autocrlf = false
 	pager = delta
 
 [user]
-	name = Freek Van der Herten
-	email = freek@spatie.be
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOd4zgKsJm1yDquP2+Ca7nZqUiJ2aZNwxJHP9gg3teWQ
+	name = Jonathan Flammier
+	email = jonathan.flammier@akiden-ventures.ch
+	signingkey = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDIyjf5UZvolO2FRmzekwSmmrrZW1GExndHFgfjO8/TULPKhpSKX/UYILCIAnto2MAr/nBqVN2zNg6xUqjcr84yZ8VIXEZXqf9fZxH3NwPBnpI760xllK7tZx6+u3abo4udRKxLnxy2Lihozdg6qYAf0lOD87kmiqmDn8p5ap0yneJ3PeYBHD++xkIrAPwROh4RZrj++Eyl7RkPHNUJve6ykPcmfhqmt0uJO1zVJLuivXs5fn7ka6+80uk67hEtRYYWQuB1Vkx9TKsR2ABq1p//SGkHI0nPJGSbinHEJ6E+secVYXZ4e0T7ohgff2daEddFSEjLMB/5h2WgDNzPFRngjB8Cj3JuylzXps805ECkmKdM0vSZorPtsgleYPtTfgKQXDfLNjHk0Ri8XKXugiDYwqRmNiGLeZYKvDZHuxEFwgYKBbttXSX6JQYKuqlaFNuC9cxv5CjF8HeQpvvZy4kI3d8/8C/fdGyR5p6H6SxvfcUuWTjSZr2sgoZAqoPJE73z+FFa9D83wbgvcgVDrjlPFI45JecQmLgfFHpRhui7TpWG+LsETCDs9KgV8LGT31Mr0D915uwoqNRwrcuyCjbKYL0mEn1GN5r0AOxOGgwv80HqdAvc9bCXIftbfif73Ccl/zrfa3LFmgwERPLOEW/RUOgyKPoodWjxXaCvPYTqtQ==
 
 [filter "lfs"]
 	required = true
@@ -21,7 +21,7 @@
 	rebase = false
 
 [init]
-	defaultBranch = main
+	defaultBranch = master
 
 [gpg]
 	format = ssh
