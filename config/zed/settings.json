@@ -38,7 +38,7 @@
   "edit_predictions": {
     "provider": "copilot",
   },
-  "theme": "One Light",
+  "theme": "One Dark",
   "theme_overrides": {
     "One Light": {
       "terminal.background": "#FDF6E3ff",

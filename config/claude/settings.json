@@ -57,7 +57,8 @@
   },
   "enabledPlugins": {
     "laravel-simplifier@laravel": true,
-    "agent-browser@agent-browser": true
+    "agent-browser@agent-browser": true,
+    "superpowers@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
   "skipDangerousModePermissionPrompt": true,
