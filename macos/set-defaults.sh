@@ -61,7 +61,7 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 # Disable the “Are you sure you want to open this application?” dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
+# defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Disable Resume system-wide
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
@@ -82,18 +82,18 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 success "General settings configured"
 
 ###############################################################################
-# SSD-specific tweaks                                                         #
+# SSD-specific tweaks (Intel only, not needed on Apple Silicon)               #
 ###############################################################################
 
-step "Configuring SSD optimizations"
+# step "Configuring SSD optimizations"
 
-# Disable hibernation (speeds up entering sleep mode)
-sudo pmset -a hibernatemode 0
+# # Disable hibernation (speeds up entering sleep mode)
+# sudo pmset -a hibernatemode 0
 
-# Disable the sudden motion sensor as it's not useful for SSDs
-sudo pmset -a sms 0
+# # Disable the sudden motion sensor as it's not useful for SSDs
+# sudo pmset -a sms 0
 
-success "SSD settings configured"
+# success "SSD settings configured"
 
 ###############################################################################
 # Keyboard and input                                                          #
@@ -108,13 +108,13 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Set language and text formats
 # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
 # `Inches`, `en_GB` with `en_US`, and `true` with `false`.
-defaults write NSGlobalDomain AppleLanguages -array "en"
-defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=EUR"
+defaults write NSGlobalDomain AppleLanguages -array "en-CH" "fr-CH"
+defaults write NSGlobalDomain AppleLocale -string "en_CH"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
 
 # Set the timezone; see `systemsetup -listtimezones` for other values
-systemsetup -settimezone "Europe/Brussels" > /dev/null
+systemsetup -settimezone "Europe/Zurich" > /dev/null
 
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
@@ -139,10 +139,10 @@ success "Screen settings configured"
 
 step "Configuring Finder"
 
-# Set Desktop as the default location for new Finder windows
+# Set home folder as the default location for new Finder windows
 # For other paths, use `PfLo` and `file:///full/path/here/`
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
 # Show icons for hard drives, servers, and removable media on the desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
@@ -219,7 +219,7 @@ step "Configuring Dock"
 defaults write com.apple.dock no-bouncing -bool true
 
 # Set the icon size of Dock items to 72 pixels
-defaults write com.apple.dock tilesize -int 72
+defaults write com.apple.dock tilesize -int 41
 
 # Hide indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool false
