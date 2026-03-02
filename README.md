@@ -17,7 +17,7 @@ Personal dotfiles with modern shell tooling, optimized for Laravel/PHP developme
 ## Quick Start
 
 ```bash
-git clone git@github.com:freekmurze/dotfiles.git ~/.dotfiles
+git clone git@github.com:arkenis/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 bin/install
 ```
@@ -132,7 +132,7 @@ Alt+C               # Fuzzy change directory
 ```bash
 a                   # php artisan
 p                   # Run Pest/PHPUnit tests
-c                   # composer
+c                   # claude
 mfs                 # php artisan migrate:fresh --seed
 nah                 # git reset --hard; git clean -df
 ```
@@ -141,7 +141,7 @@ nah                 # git reset --hard; git clean -df
 
 ```bash
 # JSON processing with jq
-curl api.github.com/users/freekmurze | jq
+curl api.github.com/users/arkenis | jq
 cat composer.json | jq '.require'
 php artisan tinker --execute="echo json_encode(User::first());" | jq
 
@@ -210,7 +210,7 @@ brew bundle --file=~/.dotfiles/config/Brewfile
 Install just Claude Code without the full dotfiles:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/freekmurze/dotfiles/main/bin/install-claude-code | bash
+curl -fsSL https://raw.githubusercontent.com/arkenis/dotfiles/master/bin/install-claude-code | bash
 ```
 
 ### What's Included
@@ -355,8 +355,17 @@ If upgrading from an older setup:
 
 ---
 
+## TODO
+
+- [ ] Review `laravel-php-guidelines.md` — overlaps with Laravel Boost and `php-guidelines-from-spatie` skill. Consider trimming to only what Boost doesn't cover (docblock rules, happy path, naming conventions) or removing entirely.
+- [ ] Review Freek's skills — decide which to keep, remove, or replace with personal ones.
+- [ ] Review Freek's agents — adapt or remove agents that don't match personal workflow.
+- [ ] Review `config/Brewfile` — remove unused packages, add personal ones.
+- [ ] Review `home/.aliases` and `home/.functions` — identify Freek-specific shortcuts to override in `~/.dotfiles-custom/shell/`.
+---
+
 ## Credits
 
-Created by [Freek Van der Herten](https://github.com/freekmurze). Used by many at [Spatie](https://spatie.be).
+Forked from [Freek Van der Herten's dotfiles](https://github.com/freekmurze/dotfiles). Maintained by [Jonathan Flammier](https://github.com/arkenis).
 
 See `config/Brewfile` for complete package list.
