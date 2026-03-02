@@ -360,7 +360,7 @@ If upgrading from an older setup:
 - [ ] Review `laravel-php-guidelines.md` — overlaps with Laravel Boost and `php-guidelines-from-spatie` skill. Consider trimming to only what Boost doesn't cover (docblock rules, happy path, naming conventions) or removing entirely.
 - [ ] Review Freek's skills — decide which to keep, remove, or replace with personal ones.
 - [ ] Review Freek's agents — adapt or remove agents that don't match personal workflow.
-- [ ] Review `config/Brewfile` — remove unused packages, add personal ones.
+- [ ] Review `config/Brewfile` — candidates for removal: `hub` (deprecated, replaced by `gh`), `ack` (replaced by `ripgrep`), `starship` (using agnoster), `doctl`, `git-secret`, `mackup`.
 - [ ] Review `home/.aliases` and `home/.functions` — identify Freek-specific shortcuts to override in `~/.dotfiles-custom/shell/`.
 ---
 
