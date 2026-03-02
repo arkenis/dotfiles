@@ -241,17 +241,20 @@ success "Dock configured"
 # Safari & WebKit                                                             #
 ###############################################################################
 
-step "Configuring Safari"
+# Safari is sandboxed on macOS Ventura+ — defaults write requires Full Disk Access.
+# Enable Develop menu manually: Safari > Settings > Advanced > Show features for web developers.
 
-# Enable Safari's debug menu
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+# step "Configuring Safari"
 
-# Enable the Develop menu and the Web Inspector in Safari
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+# # Enable Safari's debug menu
+# defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
-success "Safari configured"
+# # Enable the Develop menu and the Web Inspector in Safari
+# defaults write com.apple.Safari IncludeDevelopMenu -bool true
+# defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
+# success "Safari configured"
 
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
