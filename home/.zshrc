@@ -78,6 +78,9 @@ export XDEBUG_CONFIG="idekey=VSCODE"
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
+# Homebrew
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 # Extra paths
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH=/usr/local/bin:$PATH
@@ -96,6 +99,16 @@ export PATH="$HOME/.local/bin:$PATH"
 # zoxide - smarter cd
 if command -v zoxide &> /dev/null; then
     eval "$(zoxide init zsh)"
+fi
+
+# fzf - fuzzy finder
+if command -v fzf &> /dev/null; then
+    eval "$(fzf --zsh)"
+fi
+
+# direnv - directory-specific env vars
+if command -v direnv &> /dev/null; then
+    eval "$(direnv hook zsh)"
 fi
 
 # fnm - Node.js version manager
