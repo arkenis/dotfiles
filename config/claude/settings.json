@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_NO_FLICKER": "1"
+  },
   "permissions": {
     "allow": [
       "Skill(ray-skill:*)",
@@ -53,10 +56,7 @@
       "mcp__laravel-boost__*",
       "mcp__chrome-devtools__*"
     ],
-    "defaultMode": "acceptEdits"
-  },
-  "env": {
-    "CLAUDE_CODE_NO_FLICKER": "1"
+    "defaultMode": "auto"
   },
   "statusLine": {
     "type": "command",
@@ -68,6 +68,14 @@
     "frontend-design@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true
   },
+  "extraKnownMarketplaces": {
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    }
+  },
   "spinnerVerbs": {
     "mode": "replace",
     "verbs": [
@@ -77,12 +85,8 @@
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true,
-  "extraKnownMarketplaces": {
-    "superpowers-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "obra/superpowers-marketplace"
-      }
-    }
-  }
+  "theme": "light",
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": false,
+  "skipAutoPermissionPrompt": true
 }
