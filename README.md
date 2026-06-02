@@ -75,7 +75,6 @@ The installation creates symlinks from your home directory to the dotfiles repos
 | `~/.claude/skills` | `~/.dotfiles/config/claude/skills/` | All Claude Code skills (version-controlled) |
 | `~/.claude/agents` | `~/.dotfiles/config/claude/agents/` | All Claude Code agents (version-controlled) |
 | `~/.claude/CLAUDE.md` | `~/.dotfiles/config/claude/CLAUDE.md` | Claude Code configuration |
-| `~/.claude/laravel-php-guidelines.md` | `~/.dotfiles/config/claude/laravel-php-guidelines.md` | Laravel coding standards |
 | `~/.claude/settings.json` | `~/.dotfiles/config/claude/settings.json` | Claude Code settings |
 | `~/.config/zed/settings.json` | `~/.dotfiles/config/zed/settings.json` | Zed editor settings |
 | `~/.config/zed/keymap.json` | `~/.dotfiles/config/zed/keymap.json` | Zed custom keybindings |
@@ -215,7 +214,7 @@ curl -fsSL https://raw.githubusercontent.com/arkenis/dotfiles/master/bin/install
 ### What's Included
 
 - **Claude Code CLI** - Installed via Homebrew
-- **Custom configuration** - CLAUDE.md with coding guidelines, laravel-php-guidelines.md
+- **Custom configuration** - CLAUDE.md with coding guidelines
 - **Version-controlled skills** - Entire `~/.claude/skills` directory symlinked to dotfiles
 - **Version-controlled agents** - Entire `~/.claude/agents` directory symlinked to dotfiles
 
@@ -348,7 +347,6 @@ If upgrading from an older setup:
 
 ## TODO
 
-- [ ] Review `laravel-php-guidelines.md` — overlaps with Laravel Boost and `php-guidelines-from-spatie` skill. Consider trimming to only what Boost doesn't cover (docblock rules, happy path, naming conventions) or removing entirely.
 - [ ] Review remaining skills — install project-specific skills (Nuxt, Inertia, etc.) per-project rather than globally.
 - [ ] Review agents — consider removing `task-planner` (superpowers `writing-plans` does the same), and `laravel-feature-builder` (partial overlap with superpowers workflow). Keep `laravel-debugger` (Laravel-specific, runs on Sonnet) and `laravel-simplifier` (unique, no overlap).
 - [ ] Review `config/Brewfile` — candidates for removal: `hub` (deprecated, replaced by `gh`), `ack` (replaced by `ripgrep`), `starship` (using agnoster), `doctl`, `git-secret`, `mackup`.

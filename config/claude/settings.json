@@ -5,7 +5,7 @@
   "permissions": {
     "allow": [
       "Skill(ray-skill:*)",
-      "Skill(php-guidelines-from-spatie:*)",
+      "Skill(spatie-laravel-php:*)",
       "Skill(fix-github-issue:*)",
       "Skill(context7-auto-research:*)",
       "Skill(readability:*)",

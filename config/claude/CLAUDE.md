@@ -23,7 +23,7 @@ Keep answers concise, do not pad.
 Never use dashes (— or -) as punctuation in documentation or README files. Rephrase sentences using periods, commas, or parentheses instead.
 
 ## Coding Standards
-When working with Laravel/PHP projects, always use the php-guidelines-from-spatie skill
+When working with Laravel/PHP projects, always use the spatie-laravel-php skill
 
 ## Asana
 - Workspace: 513962806468420 (euranka.com)
