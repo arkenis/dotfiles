@@ -63,10 +63,18 @@ alias sudo='sudo '
 
 # Modern CLI tool aliases (conditional on installation)
 if command -v eza &> /dev/null; then
-    alias ls="eza --icons --group-directories-first"
-    alias l="eza -la --icons --group-directories-first --hyperlink"
-    alias ll="eza -l --icons --group-directories-first --hyperlink"
-    alias lt="eza --tree --level=2 --icons"
+    # Conductor's terminal can't render eza's Nerd Font file icons (they show as
+    # tofu boxes), so drop --icons there. Other terminals keep the icons.
+    if [[ "$__CFBundleIdentifier" == "com.conductor.app" || -n "$CONDUCTOR_INTERNAL_BIN_DIR" ]]; then
+        eza_icons=""
+    else
+        eza_icons="--icons"
+    fi
+    alias ls="eza $eza_icons --group-directories-first"
+    alias l="eza -la $eza_icons --group-directories-first --hyperlink"
+    alias ll="eza -l $eza_icons --group-directories-first --hyperlink"
+    alias lt="eza --tree --level=2 $eza_icons"
+    unset eza_icons
 fi
 
 if command -v bat &> /dev/null; then
