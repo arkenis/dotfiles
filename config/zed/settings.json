@@ -2,6 +2,11 @@
 // Matched to PhpStorm / VS Code setup
 {
   // Theme - light, matching IntelliJ
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
   "use_system_window_tabs": true,
   "show_edit_predictions": true,
   "telemetry": {
@@ -137,13 +142,14 @@
   // Project panel on the left
   "project_panel": {
     "hide_root": false,
-    "dock": "left",
+    "dock": "right",
     "button": false,
     "auto_reveal_entries": false,
   },
 
   // Hide status bar items
   "outline_panel": {
+    "dock": "right",
     "button": false,
   },
   "collaboration_panel": {
@@ -151,6 +157,7 @@
     "dock": "right",
   },
   "git_panel": {
+    "dock": "right",
     "button": false,
   },
   "notification_panel": {
@@ -162,6 +169,7 @@
 
   // Disable AI features for minimal UI
   "agent": {
+    "dock": "left",
     "enabled": true,
   },
 
