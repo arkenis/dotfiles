@@ -1,6 +1,10 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+# Skip oh-my-zsh's compaudit insecure-directory scan on startup (~20ms). Safe on
+# a single-user machine where we control everything in fpath.
+ZSH_DISABLE_COMPFIX="true"
+
 # Path to custom themes and plugins
 ZSH_CUSTOM=$HOME/.dotfiles/oh-my-zsh-custom
 
@@ -18,6 +22,10 @@ DEFAULT_USER=`whoami`
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git composer macos)
+
+# Add Homebrew's completions to fpath *before* oh-my-zsh runs compinit, so its
+# single completion init picks them up (avoids a second, expensive compinit).
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -75,7 +83,7 @@ ssh-add --apple-use-keychain 2>/dev/null;
 export XDEBUG_CONFIG="idekey=VSCODE"
 
 # Enable autosuggestions (installed via brew)
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
 # Homebrew
@@ -90,7 +98,7 @@ export PATH="$HOME/.yarn/bin:$PATH"
 #export PATH=/Users/Shared/DBngin/postgresql/17.0/bin:$PATH
 
 export PATH=$HOME/bin:~/.config/phpmon/bin:$PATH
-export JAVA_HOME="$(brew --prefix)/opt/openjdk@17"
+export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
