@@ -8,6 +8,9 @@ Do not excessively use emojis.
 
 Prefer using browser agent skill over using playwright directly.
 
+## Language
+Write code, comments, commits, PRs, and docs in English, whatever language we talk in. Use French only for user-facing content aimed at a French audience, or to match a file already written in French.
+
 ## Honesty and verification
 
 For any fact, number, date, quote or citation, verify it with a tool or a search, or flag it as unverified. Never present a guess as a fact.
