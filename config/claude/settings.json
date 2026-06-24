@@ -5,7 +5,7 @@
   "permissions": {
     "allow": [
       "Skill(ray-skill:*)",
-      "Skill(spatie-laravel-php:*)",
+      "Skill(euranka-guidelines:euranka-laravel-php:*)",
       "Skill(fix-github-issue:*)",
       "Skill(context7-auto-research:*)",
       "Skill(readability:*)",
@@ -69,7 +69,7 @@
     "marketing-skills@marketingskills": true,
     "cloudflare@cloudflare": true,
     "frontend-design@claude-plugins-official": true,
-    "typefully@typefully-skills": true
+    "euranka-guidelines@euranka": true
   },
   "extraKnownMarketplaces": {
     "marketingskills": {
@@ -88,6 +88,12 @@
       "source": {
         "source": "github",
         "repo": "typefully/agent-skills"
+      }
+    },
+    "euranka": {
+      "source": {
+        "source": "github",
+        "repo": "euranka/tool.guidelines"
       }
     }
   },

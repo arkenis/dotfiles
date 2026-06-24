@@ -55,7 +55,6 @@ if [ -d "$DOTFILES_DIR/config/claude" ]; then
 
     # Symlink configuration files
     ln -sf "$DOTFILES_DIR/config/claude/CLAUDE.md" ~/.claude/CLAUDE.md
-    ln -sf "$DOTFILES_DIR/config/claude/laravel-php-guidelines.md" ~/.claude/laravel-php-guidelines.md
     ln -sf "$DOTFILES_DIR/config/claude/settings.json" ~/.claude/settings.json
     ln -sf "$DOTFILES_DIR/config/claude/statusline.sh" ~/.claude/statusline.sh
 
@@ -76,6 +75,16 @@ fi
 # Agent Skills (included in dotfiles)
 # All skills are version-controlled in config/claude/skills/
 # No need to install them - they're symlinked from the dotfiles repo
+
+# euranka-guidelines plugin (lives in the euranka/tool.guidelines marketplace, not in this repo).
+# settings.json declares the marketplace and enables the plugin, but does not fetch it,
+# so install it explicitly here. Idempotent and non-interactive; never blocks the script.
+if command -v claude &>/dev/null; then
+    step "Installing euranka-guidelines plugin"
+    claude plugin marketplace add euranka/tool.guidelines </dev/null &>/dev/null || true
+    claude plugin install euranka-guidelines@euranka </dev/null &>/dev/null || true
+    success "euranka-guidelines plugin processed"
+fi
 
 # Done
 echo ""

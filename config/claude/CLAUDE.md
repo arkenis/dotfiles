@@ -26,7 +26,7 @@ Keep answers concise, do not pad.
 Never use dashes (— or -) as punctuation in documentation or README files. Rephrase sentences using periods, commas, or parentheses instead.
 
 ## Coding Standards
-When working with Laravel/PHP projects, always use the spatie-laravel-php skill
+When working with Laravel/PHP projects, always use the euranka-laravel-php skill
 
 Avoid `private const` in PHP. Replace each one: inline it if it is used once (use a descriptive local variable when a raw literal would obscure the meaning the name carried), or turn it into a private property if it is used more than once (`private static` when the using methods are static). When a constant is referenced from a default parameter value or a PHP attribute, where no property can be used, inline the literal there.
 

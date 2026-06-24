@@ -9,13 +9,13 @@ Review the code I just changed. Do NOT touch unrelated WIP files in the working 
 For any changed PHP files, run these two reviews **in parallel** (one message, two agent calls):
 
 1. **`laravel-simplifier` agent**: simplify and refine PHP/Laravel code.
-2. **`general-purpose` agent** invoking the `spatie-laravel-php` skill: check Spatie PHP and Laravel guidelines compliance.
+2. **`general-purpose` agent** invoking the `euranka-laravel-php` skill: check PHP and Laravel guidelines compliance.
 
 ## JS/TS changes
 
 For any changed JS/TS files, in parallel with the PHP reviews:
 
-3. **`general-purpose` agent** invoking the `spatie-javascript` skill: check Spatie JavaScript conventions.
+3. **`general-purpose` agent** invoking the `euranka-javascript` skill: check JavaScript conventions.
 
 ## Instructions for each agent
 
