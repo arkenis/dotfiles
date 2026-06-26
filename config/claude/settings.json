@@ -69,7 +69,8 @@
     "marketing-skills@marketingskills": true,
     "cloudflare@cloudflare": true,
     "frontend-design@claude-plugins-official": true,
-    "euranka-guidelines@euranka": true
+    "euranka-guidelines@euranka": true,
+    "bright-guidelines@bright": true
   },
   "extraKnownMarketplaces": {
     "marketingskills": {
@@ -94,6 +95,12 @@
       "source": {
         "source": "github",
         "repo": "euranka/tool.guidelines"
+      }
+    },
+    "bright": {
+      "source": {
+        "source": "github",
+        "repo": "bright-company/tool.guidelines"
       }
     }
   },
