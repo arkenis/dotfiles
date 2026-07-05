@@ -12,8 +12,16 @@ ZSH_CUSTOM=$HOME/.dotfiles/oh-my-zsh-custom
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
-AGNOSTER_DIR_FG=black
+# Conductor's built-in terminal can't render agnoster's powerline/Nerd Font
+# glyphs, so use a plain prompt there (set up after oh-my-zsh loads, below).
+# Every other terminal (Ghostty, iTerm, ...) keeps agnoster.
+if [[ "$__CFBundleIdentifier" == "com.conductor.app" || -n "$CONDUCTOR_INTERNAL_BIN_DIR" ]]; then
+    CONDUCTOR_TERMINAL=1
+    ZSH_THEME=""
+else
+    ZSH_THEME="agnoster"
+    AGNOSTER_DIR_FG=black
+fi
 
 # Hide username in prompt
 DEFAULT_USER=`whoami`
@@ -28,6 +36,25 @@ plugins=(git composer macos)
 fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 
 source $ZSH/oh-my-zsh.sh
+
+# Plain prompt for Conductor's terminal: no powerline separators or Nerd Font
+# glyphs (those render as tofu boxes there). Uses only glyphs present in the
+# default font. The git plugin provides git_prompt_info.
+if [[ -n "$CONDUCTOR_TERMINAL" ]]; then
+    setopt prompt_subst
+    # Mimic agnoster's segmented look without Nerd Font/powerline glyphs
+    # (Conductor's terminal renders those as tofu boxes). Solid color blocks
+    # stand in for the slanted powerline separators: a blue directory segment
+    # and a green git segment, matching the agnoster theme used in Ghostty.
+    conductor_git_segment() {
+        local branch
+        branch=$(command git symbolic-ref --short HEAD 2>/dev/null) || return
+        local dirty=""
+        [[ -n "$(command git status --porcelain 2>/dev/null)" ]] && dirty=" *"
+        print -n "%K{green}%F{black} ${branch}${dirty} %k"
+    }
+    PROMPT='%K{blue}%F{white} %~ %k$(conductor_git_segment)%f '
+fi
 
 # Removed old RVM path
 #set numeric keys
