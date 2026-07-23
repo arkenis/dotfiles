@@ -163,3 +163,8 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Raise the open-file limit. macOS defaults NOFILE to "unlimited", which the
+# kernel clamps to a tiny legacy value for real open() calls, causing
+# "Too many open files" in test runs. A concrete number avoids that clamp.
+ulimit -n 65536
