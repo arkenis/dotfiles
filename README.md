@@ -208,7 +208,7 @@ brew bundle --file=~/.dotfiles/config/Brewfile
 Install just Claude Code without the full dotfiles:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arkenis/dotfiles/master/bin/install-claude-code | bash
+curl -fsSL https://raw.githubusercontent.com/arkenis/dotfiles/main/bin/install-claude-code | bash
 ```
 
 ### What's Included
