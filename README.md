@@ -4,10 +4,45 @@
 
 Personal dotfiles with modern shell tooling, optimized for Laravel/PHP development. Features fast startup times, smart directory navigation, and modern CLI tools.
 
+## Contents
+
+**Getting started**
+
+- [Key Features](#key-features)
+- [Quick Start](#quick-start) - clone and run `bin/install`
+- [What's Included](#whats-included) - [Shell & Prompt](#shell--prompt) · [Modern CLI Tools](#modern-cli-tools) · [Development Tools](#development-tools) · [QuickLook Plugins](#quicklook-plugins)
+
+**Reference**
+
+- [How It Works](#how-it-works) - [Symlinked Files](#symlinked-files) · [Sourced Files](#sourced-files) · [Custom Agnoster Theme](#custom-agnoster-theme)
+- [Daily Usage](#daily-usage) - [Smart Navigation](#smart-navigation) · [Laravel/PHP Shortcuts](#laravelphp-shortcuts) · [Data Processing](#data-processing) · [Maintenance Commands](#maintenance-commands)
+- [Version Management](#version-management) - [Node.js via fnm](#nodejs-via-fnm) · [PHP & Composer via Homebrew](#php--composer-via-homebrew)
+- [Package Management](#package-management) - the Brewfile and global npm and Composer packages
+
+**AI setup**
+
+- [AI Development Setup](#ai-development-setup) - the Claude Code config, version-controlled
+  - [Quick Install (Standalone)](#quick-install-standalone) - the AI setup without the rest of the dotfiles
+  - [Skills](#skills) - the local skills, grouped by purpose
+  - [Plugins](#plugins) - marketplace plugins, preferred over vendored skills
+  - [Code Intelligence](#code-intelligence) - Laravel LSP, Intelephense, TypeScript
+  - [Agents](#agents) - custom subagents
+  - [The Review Workflow](#the-review-workflow) - the six lanes behind `review-code` and `review-pr`
+  - [Settings Worth Knowing](#settings-worth-knowing)
+  - [Adding New Skills](#adding-new-skills) - and the two rules that decide whether a skill gets used
+
+**Everything else**
+
+- [Customization](#customization) - [Personal Aliases & Functions](#personal-aliases--functions) · [Project-Specific Variables](#project-specific-variables)
+- [Post-Installation](#post-installation) · [Tool Comparisons](#tool-comparisons) · [Utilities](#utilities) · [Credits](#credits)
+
+---
+
 ## Key Features
 
 - **Custom Agnoster Theme** - Clean powerline prompt with no branch symbols, `•` for changes
-- **Version-Controlled Skills & Agents** - All Claude Code skills and agents synced via dotfiles
+- **Version-Controlled AI Setup** - Skills, agents, settings, and instructions for Claude Code, from one source
+- **Framework-Aware Code Intelligence** - Laravel LSP, Intelephense, and TypeScript language servers wired into the agent
 - **Fast Tools** - fnm, zoxide, ripgrep, bat, eza (all Rust-based for speed)
 - **One Command Install** - `bin/install` sets up everything including Claude Code
 
@@ -74,7 +109,7 @@ The installation creates symlinks from your home directory to the dotfiles repos
 | `~/.mackup.cfg` | `~/.dotfiles/macos/.mackup.cfg` | Mackup backup configuration |
 | `~/.claude/skills` | `~/.dotfiles/config/claude/skills/` | All Claude Code skills (version-controlled) |
 | `~/.claude/agents` | `~/.dotfiles/config/claude/agents/` | All Claude Code agents (version-controlled) |
-| `~/.claude/CLAUDE.md` | `~/.dotfiles/config/claude/CLAUDE.md` | Claude Code configuration |
+| `~/.claude/CLAUDE.md` | `~/.dotfiles/config/claude/AGENTS.md` | Agent instructions (Claude reads `CLAUDE.md`, not `AGENTS.md`) |
 | `~/.claude/settings.json` | `~/.dotfiles/config/claude/settings.json` | Claude Code settings |
 | `~/.config/zed/settings.json` | `~/.dotfiles/config/zed/settings.json` | Zed editor settings |
 | `~/.config/zed/keymap.json` | `~/.dotfiles/config/zed/keymap.json` | Zed custom keybindings |
@@ -196,75 +231,137 @@ brew bundle --file=~/.dotfiles/config/Brewfile
 - **Modern CLI**: zoxide, bat, eza, ripgrep, fd, git-delta, fnm, fzf, direnv, jq, yq, bottom, zsh-autosuggestions
 - **QuickLook**: qlcolorcode, qlstephen, qlmarkdown, quicklook-json, qlprettypatch, quicklook-csv, betterzip, suspicious-package
 - **PHP Extensions**: imagick, memcached, xdebug, redis
-- **Global npm**: agent-browser
-- **Global Composer**: laravel/envoy, spatie/phpunit-watcher, laravel/valet
+- **Global npm**: agent-browser, intelephense, typescript-language-server, typescript
+- **Global Composer**: laravel/envoy, spatie/phpunit-watcher, laravel/valet, laravel/lsp
 
 ---
 
-## Claude Code Integration
+## AI Development Setup
+
+Everything Claude Code needs lives in `config/claude/`. Conventions come from marketplace plugins rather than vendored copies, so the local skills stay few.
+
+```
+config/claude/
+├── AGENTS.md          the instructions, symlinked as ~/.claude/CLAUDE.md
+├── settings.json      Claude Code settings, permissions, plugins
+├── agents/            custom subagents
+└── skills/            local skills, plus the laravel-lsp plugin
+```
+
+`AGENTS.md` keeps the cross-tool name so upstream changes merge cleanly, and so another harness (Codex, Zed) can read it as is.
 
 ### Quick Install (Standalone)
 
-Install just Claude Code without the full dotfiles:
+Install just the AI setup without the full dotfiles:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/arkenis/dotfiles/main/bin/install-claude-code | bash
 ```
 
-### What's Included
+That installs the Claude Code CLI and symlinks the config, skills, and agents.
 
-- **Claude Code CLI** - Installed via Homebrew
-- **Custom configuration** - CLAUDE.md with coding guidelines
-- **Version-controlled skills** - Entire `~/.claude/skills` directory symlinked to dotfiles
-- **Version-controlled agents** - Entire `~/.claude/agents` directory symlinked to dotfiles
+### Skills
 
-### Skills (Version Controlled)
+All skills live in `config/claude/skills/` and are version-controlled. On a new Mac they are available immediately after the installer runs.
 
-All skills are stored in `config/claude/skills/` and version-controlled with your dotfiles. When you run the installer on a new Mac, all skills are immediately available.
+**Review and audit**
 
-**Custom Skills:**
-- `ray-skill` - Ray debugging integration
-- `fix-github-issue` - GitHub issue automation
-- `convert-issue-to-discussion` - GitHub workflow helpers
+| Skill | What it does |
+|-------|--------------|
+| `review-code` | Runs 6 review lanes in parallel over the working tree, then applies the fixes |
+| `review-pr` | Reviews a GitHub PR with the same lanes, gates on CI, merges, thanks the author. Releases only when asked |
+| `audit-architecture` | Whole-codebase audit of how state and data are modelled. Read-only, ranked P0 to P3 |
+| `explain-changes` | Explains the code on the current branch as an HTML page opened in the browser, written for a reviewer |
 
-**Community Skills:**
-- `vercel-labs/agent-skills` - Web design guidelines and React best practices
-- `anthropics/skills` - Frontend design and skill creation tools
-- `vercel-labs/agent-browser` - Browser automation
-- `expo/skills` - React Native with Expo
-- `callstackincubator/agent-skills` - React Native performance
-- `coreyhaines31/marketingskills` - Copywriting and programmatic SEO
-- `copy-editing` - Marketing copy editing
-- `copywriting` - Marketing copywriting
-- `frontend-design` - Frontend design patterns
-- `pdf` - PDF manipulation
-- `seo-audit` - SEO auditing
-- `web-design-guidelines` - Web design best practices
+**Tooling**
+
+| Skill | What it does |
+|-------|--------------|
+| `conductor` | Conductor workspaces and sessions, the CLI, the API, deep links, settings, writing briefs |
+
+### Plugins
+
+Coding conventions and most delegation come from plugins enabled in `settings.json`, not from vendored skills. A vendored copy drifts from its source and shadows the plugin version.
+
+| Plugin | Provides |
+|--------|----------|
+| `euranka-guidelines@euranka` | euranka PHP, Laravel, JavaScript, security, and version-control conventions |
+| `bright-guidelines@bright` | The Bright equivalents |
+| `laravel@laravel` | Taylor's marketplace, notably the `laravel-simplifier` agent used by the review workflow |
+| `superpowers@claude-plugins-official` | Brainstorming, planning, TDD, and debugging workflows |
+| `frontend-design@claude-plugins-official` | Frontend design guidance |
+| `agent-browser@agent-browser` | Browser automation |
+| `marketing-skills@marketingskills` | Marketing, CRO, and SEO skills |
+| `cloudflare@cloudflare` | Cloudflare tooling |
+| `php-lsp`, `typescript-lsp` | Language servers, see below |
+
+`laravel-lsp` is the one plugin that lives in this repo, under `skills/laravel-lsp/`, because no official plugin exists for it. Any directory under `skills/` with a `.claude-plugin/plugin.json` loads as a plugin named `<name>@skills-dir`.
+
+### Code Intelligence
+
+Three language servers give the agent diagnostics after every edit and real symbol navigation instead of grep.
+
+| Server | Provides | Install |
+|--------|----------|---------|
+| `laravel-lsp@skills-dir` | Config keys, route names, view paths, translation strings, middleware aliases, and container bindings, in `.blade.php` | `composer global require laravel/lsp` |
+| `php-lsp` | PHP types, symbols, references, signatures | `npm i -g intelephense` |
+| `typescript-lsp` | TypeScript and TSX intelligence | `npm i -g typescript-language-server typescript` |
+
+Laravel LSP is first-party (announced at Laracon US 2026) and has no official Claude plugin, so `skills/laravel-lsp/` wraps it in a small `.lsp.json`. Its `phpEnvironment` defaults to `auto`, which finds Herd and Valet without configuration.
+
+Claude Code registers **one server per file extension**, so the two PHP servers split the work: Intelephense takes `.php` for types, undefined methods, and references, and Laravel LSP takes `.blade.php` for route names, view paths, and translation strings. To flip that priority, disable `php-lsp` and add `".php"` back to `skills/laravel-lsp/.lsp.json`.
+
+### Agents
+
+Custom subagents live in `config/claude/agents/`.
+
+- `laravel-feature-builder` - Implements new features across models, controllers, migrations, and views
+
+Most delegation now happens through plugins instead, notably the `laravel-simplifier:laravel-simplifier` agent from Taylor's `laravel` marketplace, which is lane 2 of the review workflow.
+
+### The Review Workflow
+
+`review-code` and `review-pr` share one definition of what a review is, in `skills/review-code/references/lanes.md`. Six lanes run in parallel:
+
+1. **Correctness** - bugs, via `/code-review`
+2. **PHP simplification** - via the `laravel-simplifier` agent
+3. **euranka PHP conventions** - via `euranka-laravel-php`
+4. **Laravel practices** - via Laravel Boost's per-repo `laravel-best-practices`
+5. **JavaScript** - via `euranka-javascript`, only when JS or TS changed
+6. **Security** - authorization, mass assignment, injection, XSS, secrets, SSRF, PII in logs, with `euranka-security` as the org baseline
+
+Findings are deduplicated, and security outranks correctness, which outranks conventions. Both defect lanes require a concrete failure scenario, so "consider adding a null check" does not count as a finding.
+
+The lanes file has a per-harness table, so the same review can run under another harness with its own tools and available subagents.
+
+### Settings Worth Knowing
+
+| Setting | Why |
+|---------|-----|
+| `permissions.ask` | Always confirms before reading `~/.ssh`, `~/.aws`, Claude credentials, and `.env` files, in every mode |
+| `skillOverrides` | Hides 8 bundled skills from the model while keeping them typeable, saving context |
+| `cleanupPeriodDays` | Transcript retention, set to a year |
+| `defaultMode: auto` | A classifier handles approvals instead of prompting on every step |
 
 ### Adding New Skills
 
+Before vendoring a skill, check whether a marketplace plugin provides it. Prefer the plugin.
+
 ```bash
-# Install a new skill (adds directly to your dotfiles)
+# Install a skill (adds directly to your dotfiles)
 npx skills add <owner/repo>
 
-# Commit to version control
 cd ~/.dotfiles
 git add config/claude/skills/
 git commit -m "Add new skill"
-git push
 ```
 
+Two rules that decide whether a skill ever gets used:
+
+1. **The name and description determine everything.** A skill named after a person, or after a quarter of what it does, will not be found. Write the description around the phrases you would actually type.
+2. **Keep the body short and push detail into `references/`.** A skill body stays in context for the rest of the session once loaded, while reference files load only when needed.
+
 Browse more skills at [skills.sh](https://skills.sh)
-
-### Agents (Version Controlled)
-
-All custom agents are stored in `config/claude/agents/` and version-controlled with your dotfiles. When you run the installer on a new Mac, all agents are immediately available.
-
-**Custom Agents:**
-- `laravel-simplifier` - Simplifies and refines PHP/Laravel code for clarity and maintainability
-- `laravel-debugger` - Diagnoses and fixes issues in Laravel applications
-- `laravel-feature-builder` - Implements new features in Laravel applications
-- `task-planner` - Breaks down complex tasks into actionable steps
 
 ---
 
@@ -323,34 +420,18 @@ Variables load when you enter the directory and unload when you leave.
 The `bin/` directory contains helper scripts:
 
 - **install** - Main installation script (idempotent, safe to re-run)
-- **install-claude-code** - Standalone Claude Code installer
+- **install-claude-code** - Standalone installer for the AI setup: the CLI and the symlinks
 - **update** - Update dotfiles, Homebrew, npm, and Composer packages
 - **doctor** - Health check and diagnostic tool
 
 ---
 
-## Migration Notes
-
-If upgrading from an older setup:
-
-1. **Directory history**: Run `migration/migrate-z-to-zoxide.sh` to import your `~/.z` data
-2. **Prompt**: The default is now Oh My Zsh with custom agnoster theme
-3. **Version managers**:
-   - fnm replaces nvm for Node.js
-   - Homebrew manages PHP/Composer (no more compilation or mise)
-4. **Terminal**: Ghostty replaces iTerm2 (config symlinked from dotfiles)
-5. **Claude Code Skills**: Now version-controlled in `config/claude/skills/` and symlinked to `~/.claude/skills`
-6. **Claude Code Agents**: Now version-controlled in `config/claude/agents/` and symlinked to `~/.claude/agents`
-7. **Custom Theme**: Custom agnoster theme stored in `oh-my-zsh-custom/themes/`
-
----
-
 ## TODO
 
-- [ ] Review remaining skills — install project-specific skills (Nuxt, Inertia, etc.) per-project rather than globally.
-- [ ] Review agents — consider removing `task-planner` (superpowers `writing-plans` does the same), and `laravel-feature-builder` (partial overlap with superpowers workflow). Keep `laravel-debugger` (Laravel-specific, runs on Sonnet) and `laravel-simplifier` (unique, no overlap).
-- [ ] Review `config/Brewfile` — candidates for removal: `hub` (deprecated, replaced by `gh`), `ack` (replaced by `ripgrep`), `starship` (using agnoster), `doctl`, `git-secret`, `mackup`.
-- [ ] Review `home/.aliases` and `home/.functions` — identify Freek-specific shortcuts to override in `~/.dotfiles-custom/shell/`.
+- [ ] Review agents: consider removing `laravel-feature-builder` (partial overlap with the superpowers workflow).
+- [ ] Review `config/Brewfile`: candidates for removal are `hub` (deprecated, replaced by `gh`), `ack` (replaced by `ripgrep`), `starship` (using agnoster), `doctl`, `git-secret`, `mackup`.
+- [ ] Review `home/.aliases` and `home/.functions`: identify Freek-specific shortcuts to override in `~/.dotfiles-custom/shell/`.
+
 ---
 
 ## Credits

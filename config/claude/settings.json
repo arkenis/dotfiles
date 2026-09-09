@@ -1,14 +1,11 @@
 {
+  "cleanupPeriodDays": 365,
   "env": {
     "CLAUDE_CODE_NO_FLICKER": "1"
   },
   "permissions": {
     "allow": [
-      "Skill(ray-skill:*)",
       "Skill(euranka-guidelines:euranka-laravel-php:*)",
-      "Skill(fix-github-issue:*)",
-      "Skill(context7-auto-research:*)",
-      "Skill(readability:*)",
       "Skill(agent-browser:*)",
       "Bash(gh:*)",
       "Bash(curl:*)",
@@ -56,9 +53,26 @@
       "mcp__laravel-boost__*",
       "mcp__chrome-devtools__*"
     ],
+    "ask": [
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.claude/.credentials.json)",
+      "Read(**/.env)",
+      "Read(**/.env.*)"
+    ],
     "defaultMode": "auto"
   },
   "model": "claude-fable-5-1[1m]",
+  "skillOverrides": {
+    "simplify": "user-invocable-only",
+    "update-config": "user-invocable-only",
+    "keybindings-help": "user-invocable-only",
+    "fewer-permission-prompts": "user-invocable-only",
+    "loop": "user-invocable-only",
+    "schedule": "user-invocable-only",
+    "run": "user-invocable-only",
+    "init": "user-invocable-only"
+  },
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
@@ -70,7 +84,10 @@
     "cloudflare@cloudflare": true,
     "frontend-design@claude-plugins-official": true,
     "euranka-guidelines@euranka": true,
-    "bright-guidelines@bright": true
+    "bright-guidelines@bright": true,
+    "php-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "laravel@laravel": true
   },
   "extraKnownMarketplaces": {
     "marketingskills": {

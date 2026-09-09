@@ -27,8 +27,8 @@ Keep responses focused, brief, and concise. Keep disclaimers and caveats short, 
 
 Before your first tool call, say in one sentence what you're about to do. While working, give a brief update only when you find something important or change direction. When you finish, lead with the outcome: your first sentence should answer "what happened" or "what did you find," with supporting detail after it for readers who want it.
 
-## Writing docs / README
-Never use em-dashes (—) as punctuation in documentation or README files. Rephrase sentences using periods, commas, or parentheses instead. Normal hyphens are fine.
+## Writing
+Never use em dashes (—) or en dashes (–) as punctuation. Rephrase with periods, commas, or parentheses. Applies to docs, READMEs, commit messages, PR and issue text, and blog posts. Hyphens in compound words are fine.
 
 ## Coding Standards
 When working with Laravel/PHP projects, always use the euranka-laravel-php skill
@@ -43,4 +43,4 @@ When working with Laravel/PHP projects, always use the euranka-laravel-php skill
 ## Using GitHub
 For questions about GitHub, use the gh tool
 Never mention Claude Code in PR descriptions, PR comments, or issue comments
-Do not include a "Test plan" section in PR descriptions
+Keep PR descriptions terse: no section titles, no "Test plan", focus on the main things. Minimal examples are fine. Unless I ask for more detail.
