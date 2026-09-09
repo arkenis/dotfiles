@@ -28,12 +28,10 @@ Keep responses focused, brief, and concise. Keep disclaimers and caveats short, 
 Before your first tool call, say in one sentence what you're about to do. While working, give a brief update only when you find something important or change direction. When you finish, lead with the outcome: your first sentence should answer "what happened" or "what did you find," with supporting detail after it for readers who want it.
 
 ## Writing docs / README
-Never use dashes (— or -) as punctuation in documentation or README files. Rephrase sentences using periods, commas, or parentheses instead.
+Never use em-dashes (—) as punctuation in documentation or README files. Rephrase sentences using periods, commas, or parentheses instead. Normal hyphens are fine.
 
 ## Coding Standards
 When working with Laravel/PHP projects, always use the euranka-laravel-php skill
-
-Avoid `private const` in PHP. Replace each one: inline it if it is used once (use a descriptive local variable when a raw literal would obscure the meaning the name carried), or turn it into a private property if it is used more than once (`private static` when the using methods are static). When a constant is referenced from a default parameter value or a PHP attribute, where no property can be used, inline the literal there.
 
 ## Asana
 - Workspace: 513962806468420 (euranka.com)
