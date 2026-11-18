@@ -8,3 +8,8 @@
 # Local configs
 home/.yarnrc
 .claude/
+
+# Machine-local skill state and build artifacts
+config/claude/skills/synced/
+config/claude/skills/.trash/
+__pycache__/
