@@ -1,11 +1,11 @@
 {
   "cleanupPeriodDays": 365,
+  "env": {
+    "CLAUDE_CODE_NO_FLICKER": "1"
+  },
   "attribution": {
     "commit": "",
     "pr": ""
-  },
-  "env": {
-    "CLAUDE_CODE_NO_FLICKER": "1"
   },
   "permissions": {
     "allow": [
@@ -66,7 +66,6 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5-1[1m]",
   "skillOverrides": {
     "simplify": "user-invocable-only",
     "update-config": "user-invocable-only",
@@ -128,6 +127,11 @@
   "outputStyle": "Concise",
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-fable-5-1": {
+      "effortLevel": "high"
+    }
+  },
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
@@ -170,10 +174,5 @@
       "**Org-specific CLIs**: gh (GitHub), gcloud (Google Cloud), tofu (OpenTofu/Terraform), stripe, agent-browser",
       "routine under jerrican-server/ prefix: php, composer, vendor/bin (Pint, PHPUnit) commands are routine dev workflow per CLAUDE.md"
     ]
-  },
-  "modelSettings": {
-    "claude-fable-5-1": {
-      "effortLevel": "high"
-    }
   }
 }
